@@ -14,7 +14,6 @@
 // --------------------------------------------------------------
 // --------------------------------------------------------------
 #include <bluefruit.h>
-#include <SoftwareSerial.h>
 
 #undef min // vaya tela, están definidos en bluefruit.h y  !
 #undef max // colisionan con los de la biblioteca estándar
@@ -26,10 +25,7 @@
 #include <Adafruit_TinyUSB.h> // for Serial
 
 // Definicion de los pines UART
-#define RX_PIN 15
-#define TX_PIN 17
 
-SoftwareSerial mySerial(RX_PIN, TX_PIN); // RX, TX
 
 // --------------------------------------------------------------
 // --------------------------------------------------------------
@@ -37,7 +33,7 @@ namespace Globales {
   
   LED elLED ( /* NUMERO DEL PIN LED = */ 7 );
 
-  PuertoSerie elPuerto ( /* velocidad = */ 115200 ); // 115200 o 9600 o ...
+  PuertoSerie elPuerto ( /* velocidad = */ 9600 ); // 115200 o 9600 o ...
 
   // Serial1 en el ejemplo de Curro creo que es la conexión placa-sensor 
 };
@@ -72,8 +68,6 @@ void inicializarPlaquita () {
 // setup()
 // --------------------------------------------------------------
 void setup() {
-  mySerial.begin(9600);
-
   Globales::elPuerto.esperarDisponible();
 
   // 
@@ -95,7 +89,7 @@ void setup() {
   // 
   // 
   Globales::elMedidor.iniciarMedidor();
-
+  
   // 
   // 
   // 
@@ -147,7 +141,7 @@ void loop () {
   // 
   // mido y publico
   // 
-  int valorCO2 = elMedidor.medirCO2(mySerial);
+  int valorCO2 = elMedidor.medirCO2();
   
   elPublicador.publicarCO2( valorCO2,
 							cont,
