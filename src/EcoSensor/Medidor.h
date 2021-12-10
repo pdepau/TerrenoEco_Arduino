@@ -41,10 +41,25 @@ class Medidor {
     // .....................................................
     // .....................................................
     /**
-       () -> Z
-       Analiza los valores recibidos por el serial
+     () -> Z
+      Analiza los valores recibidos por el serial
 
-       @return int valor de CO2
+      @return int valor de CO2
+      
+      Lectura del sensor iniciada...esperando...
+      -294433885
+      260
+      25
+      71
+      32040
+      27052
+      40458
+      0
+      0
+      3
+      31
+
+      Donde la concentración de gas es 260, la temperatura 25ºC y la humedad 71%
     */
     int medirCO2() {
       Serial1.print('\r'); // Inicia una lectura del sensor. Ahora hay que espera a que nos envíe algo de vuelta!
@@ -56,7 +71,7 @@ class Medidor {
       Serial1.flush();
       Serial.println("Final del for");
       
-      return sensorData;
+      return sensorData[1];
     } // ()
 
     // .....................................................
